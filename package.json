@@ -1,0 +1,23 @@
+{
+  "name": "Game-of-War-JS-DC-Lab-01",
+  "version": "1.0.0",
+  "description": "[Intro to JavaScript](https://github.com/ga-students/JS-DC)",
+  "main": "war-game.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shesgottadevelopit/JS-DC-Lab-01.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shesgottadevelopit/JS-DC-Lab-01/issues"
+  },
+  "homepage": "https://github.com/shesgottadevelopit/JS-DC-Lab-01#readme",
+  "dependencies": {
+    "prompt": "^1.0.0"
+  }
+}
