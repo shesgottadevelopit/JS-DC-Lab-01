@@ -21,16 +21,16 @@ Program Requirements
     - If both players draw cars with the same score, the command line should print "WAR" and then draw more cards from each player to break the tie
 */
 
-// it should have a way to ensure there are at least two players
-// it should have a method that shuffles the deck of cards
-// it should have a method that then deals that deck of cards evenly between two players
-// it should have a method that pulls one card from each players hand and then prints those cards on the command line ALONG with the following stats:
+// 1. it should have a way to ensure there are at least two players
+// 2. it should have a method that shuffles the deck of cards -DONE
+// 3. it should have a method that then deals that deck of cards evenly between two players - DONE
+// 4. it should have a method that pulls one card from each players hand and then prints those cards on the command line ALONG with the following stats:
 /* PLAYER STATS ARE:
     1. current cards (already stated)
     2. current round
     3. how many cards each player has left in their deck
 */
-// it should have a way to evaluate the ranks of each players given cards.
+// 5. it should have a way to evaluate the ranks of each players given cards.
     // if both cards have the same rank, print WAR and then automatically generate a new set of cards for both players
     // if x players card is higher ranked than y players card, then push both x and y players cards to the bottom of the x deck
-// it should have a way to evaluate if there are any cards left and once only one player has all the cards, print "Player xyz is the winner of War"
+// 6. it should have a way to evaluate if there are any cards left and once only one player has all the cards, print "Player xyz is the winner of War"
