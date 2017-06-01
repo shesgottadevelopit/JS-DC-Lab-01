@@ -59,7 +59,6 @@ class DeckofCards {
                 this.getRandomCardToShuffle();
 
             }
-            //return this.shuffledDeck;
         };
         this.dealHand = function(hand) {
 
@@ -84,6 +83,25 @@ class Player {
         this.username = username;
         this.hand = [];
         newDeck.dealHand(this.hand);
+
+        this.pullCardMethod = function() {
+            let randomCard = Math.floor(Math.random() * this.hand.length);
+            let theCard = this.hand[randomCard];
+            newDeck.removeCard(this.hand, randomCard)
+            return theCard; //console.log(theCard);
+        }
+        this.playerStats = {
+            cardPlayed: this.pullCardMethod(),
+            currentNumberOfCardsInDeck: this.hand.length
+        };
+        this.addCard = function (x) {
+            this.hand.push(x);
+        };
+        this.deleteCard = function(x) {
+            newDeck.remove(this.hand, x)
+        }
+
+
     }
 }
 
@@ -93,22 +111,30 @@ const newDeck = new DeckofCards(ranks, suits);
 newDeck.createNewDeck(ranks, suits);
 
 // create a deck and log the number of cards
-console.log('The original number of cards in our unshuffled deck is: ' + newDeck.cards.length)
-console.log(newDeck.cards)
+// console.log('The original number of cards in our unshuffled deck is: ' + newDeck.cards.length)
+// console.log(newDeck.cards)
 
 
 // test shuffled deck
 newDeck.shuffleCards();
-console.log('The number of cards in our NOW shuffled deck is: ' +newDeck.shuffledDeck.length)
-console.log(newDeck.shuffledDeck)
-console.log('The number of cards in our original unshuffled deck is now: ' + newDeck.cards.length)
-console.log(newDeck.cards)
+// console.log('The number of cards in our NOW shuffled deck is: ' +newDeck.shuffledDeck.length)
+// console.log(newDeck.shuffledDeck)
+// console.log('The number of cards in our original unshuffled deck is now: ' + newDeck.cards.length)
+// console.log(newDeck.cards)
 
 
 // deal hands to players
 let bey = new Player('beyonce');
-console.log(bey);
+//console.log(bey);
+//let newPlayer = new Player()
 let riri = new Player('rihanna');
-console.log(riri);
-console.log('The number of cards in riri\'s hand is ' + riri.hand.length)
-console.log('The number of cards in our shuffled deck after dealing to player(s) is ' + newDeck.shuffledDeck.length);
+//console.log(riri);
+// console.log('The number of cards in riri\'s hand is ' + riri.hand.length)
+// console.log('The number of cards in our shuffled deck after dealing to player(s) is ' + newDeck.shuffledDeck.length);
+
+// test addition Player Methods and Objects
+//console.log(bey.pullCardMethod());
+// console.log(bey.hand.length)
+// console.log(bey.hand)
+//console.log(riri.pullCardMethod());
+console.log(bey.playerStats)
