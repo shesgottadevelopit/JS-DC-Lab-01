@@ -25,7 +25,7 @@
 // 2. it should have a method that shuffles the deck of cards -DONE
 // 3. it should have a method that then deals that deck of cards evenly between two players - DONE
 // 4. it should have a method that pulls one card from each players hand and then prints those cards on the command line ALONG with the following stats:
-/* PLAYER STATS ARE:
+/* PLAYER STATS ARE: - THERE IS AN OBJECT STORING THIS INFORMATION
     1. current cards (already stated)
     2. current round
     3. how many cards each player has left in their deck
