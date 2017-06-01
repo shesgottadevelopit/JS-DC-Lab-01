@@ -1,5 +1,8 @@
-// card components
+// function init() {
 
+var prompt = require('prompt')
+
+// card components
 const suits = ['hearts', 'clubs', 'spades', 'diamonds']
 const ranks = ['ace', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'jack', 'queen', 'king']
 const rankScores = { ace: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10, jack: 11, king: 12, queen: 13 }
@@ -79,8 +82,22 @@ class DeckofCards {
 
 // class for players
 class Player {
-    constructor(username='Program Generated Player') {
-        this.username = username;
+    constructor() {
+    // constructor(username='Program Generated Player') {
+        // this.username = username;
+        // a method for retrieving the username via prompt - not sure if it's working
+        this.username = function() {
+            prompt.start();
+            var property = {
+                message: 'what is your name?',
+                name: 'username'
+            }
+            prompt.get(property, function(err, result) {
+                console.log('This player\'s name is: ' + result.username);
+                return result.username;
+                letsPlay.players.push(result.username);
+            })
+        };
         this.hand = [];
         newDeck.dealHand(this.hand);
 
@@ -92,6 +109,7 @@ class Player {
         }
         this.playerStats = {
             cardPlayed: this.pullCardMethod(),
+
             currentNumberOfCardsInDeck: this.hand.length
         };
         this.addCard = function (x) {
@@ -124,8 +142,8 @@ newDeck.shuffleCards();
 
 
 // deal hands to players
-let bey = new Player('beyonce');
-//console.log(bey);
+let bey = new Player();
+bey.username();
 //let newPlayer = new Player()
 let riri = new Player('rihanna');
 //console.log(riri);
@@ -137,4 +155,7 @@ let riri = new Player('rihanna');
 // console.log(bey.hand.length)
 // console.log(bey.hand)
 //console.log(riri.pullCardMethod());
-console.log(bey.playerStats)
+//console.log(bey.playerStats)
+
+// }
+// module.exports = init;
