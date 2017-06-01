@@ -26,38 +26,60 @@ var prompt = require('prompt');
 
 function newGame() {
 
-    if(letsPlay.players === 2) { // let's play
+    // let's get a new deck of cards
+    const cardDeck = new DeckofCards(ranks, suits);
+    cardDeck.createNewDeck(ranks,suits);
 
-    bey.pullCardMethod();
-    riri.pullCardMethod();
-        if(bey.playerStats.cardPlayed.score === riri.playerStats.cardPlayed.score) {
-            // do this
-        } else if (bey.playerStats.cardPlayed.score > riri.playerStats.cardPlayed.score) {
-            //do this
+    // let's shuffle that deck of cards
+    cardDeck.shuffleCards();
 
-        } else {
-            // do this
-        }
+    // let's create two players and ask them for their names and they will automatically be dealt 26 cards each
+    let playerOne = new Player();
+    let playerTwo = new Player();
 
-    }
+    playerOne.username;
+    playerTwo.username;
+
+    playerOne.hand;
+    playerTwo.hand;
+
+
+
+    // if(letsPlay.players === 2) { // let's play
+    //
+    // bey.pullCardMethod();
+    // riri.pullCardMethod();
+    //     if(bey.playerStats.cardPlayed.score === riri.playerStats.cardPlayed.score) {
+    //         // do this
+    //     } else if (bey.playerStats.cardPlayed.score > riri.playerStats.cardPlayed.score) {
+    //         //do this
+    //
+    //     } else {
+    //         // do this
+    //     }
+    //
+    // }
+
 
 }
+
+newGame();
 // class for a game
-class Game {
-    constructor() {
-        this.players = [];
-        this.gameStats = {
-            currentRound: function() {
-                // figure out a way to count the number of times both players pulled a card
-            },
-            //printPlayerStats: x
-        };
-        this.wonCurrentRound = '';
-        this.wonTheGame = '';
-
-    }
-}
-
-let letsPlay = new Game();
-console.log(letsPlay)
-console.log(letsPlay.players)
+// class Game {
+//     constructor() {
+//         this.players = [];
+//         this.gameStats = {
+//             currentRound: function() {
+//                 // figure out a way to count the number of times both players pulled a card
+//             },
+//             //printPlayerStats: x
+//         };
+//         this.wonCurrentRound = '';
+//         this.wonTheGame = '';
+//
+//     }
+// }
+//
+// let letsPlay = new Game();
+// console.log(letsPlay)
+// console.log(letsPlay.players)
