@@ -2,3 +2,4 @@ classes.js
 node_modules
 _*
 *.un~
+.DS_Store

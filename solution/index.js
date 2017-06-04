@@ -1,22 +1,20 @@
-var prompt = require('prompt')
-var Player = require('./models/player')
-var GameOfWar = require('./models/Game')
+/*
+ * War
+ * A card game player between two players.
+ *
+ */
+const prompt = require('prompt')
+const game = require('./models/game.js')
+const Player = require('./models/Player.js')
 
 prompt.start()
 
 prompt.get(['playerOneUsername', 'playerTwoUsername'], function( err, result ) {
 
-  var playerOne = new Player( result.playerOneUsername )
-  var playerTwo = new Player( result.playerTwoUsername )
 
-  var Game = new GameOfWar( playerOne, playerTwo )
-  Game.play()
+  const playerOne = new Player( result.playerOneUsername )
+  const playerTwo = new Player( result.playerTwoUsername )
+
+  game( playerOne, playerTwo )
 
 })
-
-
-// var playerOne = new Player( 'Zakk' )
-// var playerTwo = new Player( 'Christine' )
-// 
-// var Game = new GameOfWar( playerOne, playerTwo )
-// Game.play()
