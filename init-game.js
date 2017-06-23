@@ -1,191 +1,103 @@
-// function init() {
-
+const Card = require('./models/Card.js');
+const DeckofCards = require('./models/Deck.js')
+const Player = require('./models/Player.js');
 var prompt = require('prompt')
+
+
 
 // card components
 const suits = ['hearts', 'clubs', 'spades', 'diamonds']
 const ranks = ['ace', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'jack', 'queen', 'king']
 const rankScores = { ace: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10, jack: 11, king: 12, queen: 13 }
-// const suits = ['hearts', 'clubs', 'spades']
-// const ranks = ['ace', 'two', 'three']
-// const rankScores = { ace: 1, two: 2, three: 3}
+
+let bey = new Player()
+let ri = new Player()
+//
+prompt.start();
+
+prompt.message = 'Enter the name for '
+prompt.get(['user1', 'user2'], function(err, result) {
+    // console.log('This player\'s name is: ' + result.user1);
+    // console.log('This player\'s name is: ' + result.user2);
+    //console.log(result)
+
+    bey.username = (result.user1)
+    ri.username = (result.user2)
+    //console.log(bey.username)
+
+    newGame()
+
+})
+
+function newGame() {
+    const newDeck = new DeckofCards(ranks, suits);
+    newDeck.createNewDeck(ranks, suits);
+    newDeck.shuffleCards();
 
 
+    // let bey = new Player('beyonce')
+    newDeck.dealHand(bey.hand)
+    console.log(`${bey.username} has ${bey.hand.length} cards`)
 
-// class for an individual card
-class Card {
-    constructor(rank, suit) {
-        this.suit = suit;
-        this.rank = rank;
-        this.title = this.rank + ' of ' + this.suit;
-        this.score = rankScores[this.rank]; // or //this.score = rankScores[rank]
+    // let ri = new Player('rihanna')
+    newDeck.dealHand(ri.hand)
+    console.log(`${ri.username} has ${ri.hand.length} cards`)
+
+
+    let rounds = 1;
+
+    while (bey.hand.length !== 52 || ri.hand.length !== 52) {
+    // for(let i = 1; i <= rounds; i++) {
+        bey.pullCardMethod()
+        ri.pullCardMethod()
+        console.log(`Round ${rounds}`)
+        console.log(`${bey.username} pulled this card: ${bey.currentCard[0].title}`)
+        console.log(`${ri.username} pulled this card: ${ri.currentCard[0].title}`)
+
+        if (bey.currentCard[0].score === ri.currentCard[0].score) {
+            console.log('War!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+            console.log(`${bey.username} now has ${bey.hand.length} cards in hand`)
+            console.log(`${ri.username} now has ${ri.hand.length} cards in hand`)
+            // console.log(`${bey.username} now has ${bey.currentCard.length} current cards`)
+            // console.log(`${ri.username} now has ${ri.currentCard.length} current cards`)
+            console.log(bey.currentCard.length+ri.currentCard.length + ` cards are on the line`)
+
+        }  else if (bey.currentCard[0].score > ri.currentCard[0].score) {
+            bey.hand = bey.hand.concat(ri.currentCard, bey.currentCard );
+            console.log(bey.currentCard.length+ri.currentCard.length + ` cards are on the line`)
+            // console.log(`${bey.username} now has ${bey.currentCard.length} current cards`)
+            // console.log(`${ri.username} now has ${ri.currentCard.length} current cards`)
+            console.log(`${bey.username} now has ${bey.hand.length} cards`)
+            console.log(`${ri.username} now has ${ri.hand.length} cards`)
+            bey.currentCard = []
+            ri.currentCard = []
+            console.log(`${bey.username} wins round:${rounds}`)
+
+        } else {
+            ri.hand = ri.hand.concat(bey.currentCard, ri.currentCard)
+            console.log(bey.currentCard.length+ri.currentCard.length + ` cards are on the line`)
+            // console.log(`${bey.username} now has ${bey.currentCard.length} current cards`)
+            // console.log(`${ri.username} now has ${ri.currentCard.length} current cards`)
+            console.log(`${bey.username} now has ${bey.hand.length} cards`)
+            console.log(`${ri.username} now has ${ri.hand.length} cards`)
+            bey.currentCard = []
+            ri.currentCard = []
+            console.log(`${ri.username} wins round:${rounds}`)
+        }
+        rounds++
+        console.log('------------------------------------------------')
+
+        if (bey.hand.length === 0 || ri.hand.length === 0) {
+            break;
+        }
+
+    }
+
+    if (bey.hand.length === 0) {
+        console.log(`${ri.username} wins War!!!`)
+    } else if (ri.hand.length === 0) {
+        console.log(`${bey.username} wins War!!!`)
     }
 }
 
-//const newCard = new Card('queen', 'hearts');
-//console.log(newCard);
-
-
-// deck of cards class; once it is pulled, it can't be regenerated until the the array is empty
-class DeckofCards {
-    constructor(ranks, suits) {
-        this.cards = [];
-        this.shuffledDeck = [];
-        this.createNewDeck = function(ranks, suits) {
-            if (this.cards.length === 0) {
-                for(let i = 0; i < ranks.length; i ++) {
-                    for (let j = 0; j < suits.length; j++) {
-                        //this.cards.push(ranks[i] + ' of ' + suits[j])
-                        this.cards.push(new Card(ranks[i], suits[j]))
-                    }
-                }
-            } else {
-                return;
-            }
-
-        };
-        this.removeCard = function(deck,position) {
-            deck.splice(position,1);
-            return position;
-        };
-        // i can possibly combine getRandomCardToShuffle and shuffleCards into one function
-        this.getRandomCardToShuffle = function() {
-            let randomCardIndex = Math.floor(Math.random() * this.cards.length);
-            this.shuffledDeck.push(this.cards[randomCardIndex]);
-            this.removeCard(this.cards,randomCardIndex)
-            //return this.cards[randomCard]
-
-        };
-        this.shuffleCards = function( ) {
-            // is the total number of cards, it will always be 52 in this case, can also pass in a variable instead
-            for (let i = 0; i < 52; i++) {
-                this.getRandomCardToShuffle();
-
-            }
-        };
-        this.dealHand = function(hand) {
-
-            if (this.shuffledDeck.length === 52) {
-                for(let i = 0; i < 26; i++) {
-                    hand.push(this.shuffledDeck[i])
-                    this.removeCard(this.shuffledDeck, i)
-                }
-            } else {
-                for(let i = this.shuffledDeck.length - 1; i >= 0; i--) {
-                    hand.push(this.shuffledDeck[i])
-                    this.removeCard(this.shuffledDeck, i)
-                }
-            }
-        }
-    }
-}
-
-// class for players
-class Player {
-    constructor() {
-    // constructor(username='Program Generated Player') {
-        // this.username = username;
-        // a method for retrieving the username via prompt - not sure if it's working
-        this.username = function() {
-            prompt.start();
-            var property = {
-                message: 'what is your name?',
-                name: 'username'
-            }
-            prompt.get(property, function(err, result) {
-                console.log('This player\'s name is: ' + result.username);
-                return result.username;
-                letsPlay.players.push(result.username);
-            })
-        };
-        this.hand = [];
-        // newDeck.dealHand(this.hand);
-        cardDeck.dealHand(this.hand)
-
-        this.pullCardMethod = function() {
-            let randomCard = Math.floor(Math.random() * this.hand.length);
-            let theCard = this.hand[randomCard];
-            // newDeck.removeCard(this.hand, randomCard)
-            cardDeck.removeCard(this.hand, randomCard)
-            return theCard; //console.log(theCard);
-        }
-        this.playerStats = {
-            cardPlayed: this.pullCardMethod(),
-            //cardPlayedScore: this.playerStats.cardPlayed.score,
-            currentNumberOfCardsInDeck: this.hand.length
-        };
-        this.addCard = function (x) {
-            this.hand.push(x);
-        };
-        this.deleteCard = function(x) {
-            // newDeck.remove(this.hand, x)
-            cardDeck.remove(this.hand, x)
-        }
-
-
-    }
-}
-
-
-// assign card deck
-const newDeck = new DeckofCards(ranks, suits);
-newDeck.createNewDeck(ranks, suits);
-
-// create a deck and log the number of cards
-console.log('The original number of cards in our unshuffled deck is: ' + newDeck.cards.length)
-console.log(newDeck.cards)
-
-
-// test shuffled deck
-newDeck.shuffleCards();
-console.log('The number of cards in our NOW shuffled deck is: ' +newDeck.shuffledDeck.length)
-console.log(newDeck.shuffledDeck)
-console.log('The number of cards in our original unshuffled deck is now: ' + newDeck.cards.length)
-console.log(newDeck.cards)
-
-
-// deal hands to players
-let bey = new Player();
-bey.username();
-let riri = new Player('rihanna');
-console.log(riri);
-console.log('The number of cards in riri\'s hand is ' + riri.hand.length)
-console.log('The number of cards in our shuffled deck after dealing to player(s) is ' + newDeck.shuffledDeck.length);
-
-// test addition Player Methods and Objects
-console.log(bey.pullCardMethod());
-console.log(bey.hand.length)
-console.log(bey.hand)
-console.log(riri.pullCardMethod());
-console.log(bey.playerStats.cardPlayed)
-console.log(bey.playerStats.cardPlayed.score)
-
-// }
-// module.exports = init;
-
-//console.log(riri.playerStats.cardPlayedScore)
-
-// ------------------------ testing still 
-
-// this function doesn't work yet lol
-// function newGame() {
-//
-//     // let's get a new deck of cards
-//     const cardDeck = new DeckofCards(ranks, suits);
-//     cardDeck.createNewDeck(ranks,suits);
-//
-//     // let's shuffle that deck of cards
-//     cardDeck.shuffleCards();
-//
-//     // let's create two players and ask them for their names and they will automatically be dealt 26 cards each
-//     let playerOne = new Player();
-//     let playerTwo = new Player();
-//
-//     playerOne.username;
-//     playerTwo.username;
-//
-//     playerOne.hand;
-//     playerTwo.hand;
-//
-// }
-// newGame();
+module.exports = newGame

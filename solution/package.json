@@ -1,38 +1,23 @@
 {
-<<<<<<< HEAD
-  "name": "JS-DC-4-Lab01",
-  "version": "1.0.0",
-  "description": "You have been contracted to build a command line game that models the card game `War`.",
-=======
+
   "name": "lab01",
   "version": "1.0.0",
   "description": "[Intro to JavaScript](https://github.com/ga-students/JS-DC)",
->>>>>>> 8523f0982c0b9003571a3198f518dc524b611a84
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-<<<<<<< HEAD
-    "url": "git+https://github.com/ga-students/JS-DC-4-Lab01.git"
-=======
     "url": "git+https://github.com/ZakkMan/JS-DC-Lab-01.git"
->>>>>>> 8523f0982c0b9003571a3198f518dc524b611a84
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-<<<<<<< HEAD
-    "url": "https://github.com/ga-students/JS-DC-4-Lab01/issues"
-  },
-  "homepage": "https://github.com/ga-students/JS-DC-4-Lab01#readme",
-=======
     "url": "https://github.com/ZakkMan/JS-DC-Lab-01/issues"
   },
   "homepage": "https://github.com/ZakkMan/JS-DC-Lab-01#readme",
->>>>>>> 8523f0982c0b9003571a3198f518dc524b611a84
   "dependencies": {
     "prompt": "^1.0.0"
   }

@@ -42,6 +42,10 @@ class Deck {
     }
   }
 
+  createDeck() {
+
+  }
+
   // deal a hand of cards (i.e. 26 random cards)
   dealHand() {
     // array to return at the end
@@ -65,6 +69,12 @@ class Deck {
   }
 
 }
+
+let gameDeck = new Deck()
+gameDeck.cards.length // => 0
+gameDeck.createDeck()
+gameDeck.cards.length // => 52
+
 
 // const gameDeck = new Deck()
 // let hand = gameDeck.dealHand() // => 26 random cards
